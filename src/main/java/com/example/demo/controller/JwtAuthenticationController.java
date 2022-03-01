@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.Objects;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,7 +34,7 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    //Akan dipanggil kalo usernya belum punya token yg valid
+    // Akan dipanggil kalo usernya belum punya token yg valid
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
@@ -44,7 +45,14 @@ public class JwtAuthenticationController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token)); //NOTE: Return data usernya di sini
+        JSONObject obj = new JSONObject();
+        // NOTE: tambah data user sesuai kebutuhan
+        obj.put("username", userDetails.getUsername());
+        obj.put("token", new JwtResponse(token));
+
+        return ResponseEntity.ok(obj.toString());
+        // return ResponseEntity.ok(new JwtResponse(token)); //NOTE: Return data usernya
+        // di sini
     }
 
     private void authenticate(String username, String password) throws Exception {

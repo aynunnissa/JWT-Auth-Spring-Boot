@@ -32,12 +32,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String requestTokenHeader = request.getHeader("Authorization");
-        System.out.println("Request: " + requestTokenHeader);
+        // System.out.println("Request: " + requestTokenHeader);
         String username = null;
         String jwtToken = null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
-        System.out.println(requestTokenHeader);
+        // System.out.println(requestTokenHeader);
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {
@@ -45,7 +45,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             } catch (IllegalArgumentException e) {
                 System.out.println("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired"); //NOTE: Ini bisa gasih return aja?
+                System.out.println("JWT Token has expired"); // NOTE: Ini bisa gasih return aja?
             }
         } else {
             logger.warn("JWT Token does not begin with Bearer String");
@@ -68,8 +68,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 // that the current user is authenticated. So it passes the
                 // Spring Security Configurations successfully.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            } //NOTE: expirednya dari sini bisa ga yaa
-        } 
+            } // NOTE: expirednya dari sini bisa ga yaa
+        }
         chain.doFilter(request, response);
     }
 }
