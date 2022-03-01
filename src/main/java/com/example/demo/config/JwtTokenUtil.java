@@ -25,7 +25,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtTokenUtil implements Serializable {
 
     private static final long serialVersionUID = -2550185165626007488L;
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; //NOTE: expired dalam 5 jam
     // SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     // String base64Key = Encoders.BASE64.encode(key.getEncoded());
 
