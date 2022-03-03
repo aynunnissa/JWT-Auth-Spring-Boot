@@ -48,7 +48,8 @@ public class JwtAuthenticationController {
         JSONObject obj = new JSONObject();
         // NOTE: tambah data user sesuai kebutuhan
         obj.put("username", userDetails.getUsername());
-        obj.put("token", new JwtResponse(token));
+        obj.put("role", userDetails.getAuthorities());
+        obj.put("token", token);
 
         return ResponseEntity.ok(obj.toString());
         // return ResponseEntity.ok(new JwtResponse(token)); //NOTE: Return data usernya

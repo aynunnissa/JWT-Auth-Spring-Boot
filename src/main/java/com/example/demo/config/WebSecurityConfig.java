@@ -52,6 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/authenticate/**");
+        web.ignoring().antMatchers("/usersistem/add/**");
     }
 
     @Override
@@ -61,7 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // dont authenticate this particular request
                 .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
                 .authorizeRequests()
-                .antMatchers("/authenticate/**").permitAll().
+                .antMatchers("/authenticate/**").permitAll()
+                .antMatchers("/usersistem/add/**").permitAll().
                 // all other requests need to be authenticated
                 anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to

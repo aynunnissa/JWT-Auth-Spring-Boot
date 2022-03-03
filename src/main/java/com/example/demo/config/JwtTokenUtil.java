@@ -25,19 +25,9 @@ import io.jsonwebtoken.security.Keys;
 public class JwtTokenUtil implements Serializable {
 
     private static final long serialVersionUID = -2550185165626007488L;
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; //NOTE: expired dalam 5 jam
-    // SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    // String base64Key = Encoders.BASE64.encode(key.getEncoded());
-
-    // @Value("${jwt.secret}")
-    // private String secret;
+    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60; // NOTE: expired dalam 5 jam
     private String secret = "thisismycustomSecretkeyforauthneticationspringbootthisismycustomSecretkeyforauthneticationspringboot";
 
-    // byte[] bytesEncoded = Base64.getEncoder().encode(secret.getBytes());
-    // SecretKey key = Keys.hmacShaKeyFor(bytesEncoded);
-
-    // byte[] keyBytes = Decoders.BASE64.decode(this.secret);
-    // SecretKey key = Keys.hmacShaKeyFor(keyBytes);
     SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     String secretString = Encoders.BASE64.encode(key.getEncoded());
 
